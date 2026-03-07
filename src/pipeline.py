@@ -1,13 +1,10 @@
-from router import classify_query
-from bash_tools import run_command
-from bash_tools import select_tool
-from llm import generate_answer
+from src.router import classify_query
+from src.bash_tools import run_command
+from src.bash_tools import select_tool
+from src.llm import generate_answer
 
 
 import logging
-from router import classify_query
-from bash_tools import select_tool, run_command
-from llm import generate_answer
 
 logging.basicConfig(level=logging.INFO)
 

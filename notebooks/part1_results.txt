@@ -1,0 +1,18 @@
+QUESTION: Where is the FastAPI app defined?
+The FastAPI app is defined in the following locations:
+
+1. `./metrics-service/app/main.py` at line 165: `app = FastAPI()`
+2. `./auth_server/server.py` at line 667: `app = FastAPI()`
+3. `./agents/a2a/src/flight-booking-agent/agent.py` at line 61: `app = FastAPI(title="Flight Booking Agent", lifespan=lifespan)`
+4. `./agents/a2a/src/travel-assistant-agent/server.py` at line 51: `app = FastAPI(title="Travel Assistant Agent", lifespan=lifespan)`
+
+QUESTION: How does authentication work?
+The context does not contain a detailed explanation of how authentication works. However, it appears to use Keycloak for authentication, as seen in `./credentials-provider/keycloak/generate_tokens.py`. 
+
+Specifically, it uses the client credentials method for authentication, as mentioned in `./credentials-provider/keycloak/generate_tokens.py:183`. The `load_agent_config` method in `./credentials-provider/keycloak/generate_tokens.py:59` loads the agent configuration, and the `find_agent_configs` method in `./credentials-provider/keycloak/generate_tokens.py:290` finds agent configurations in the specified OAuth tokens directory. 
+
+For more information on how authentication works, additional context or code would be required.
+
+QUESTION: Where is the CLI implemented?
+The context does not contain the answer. The provided codebase context does not explicitly mention the implementation of the CLI. It shows various Python files and their respective line numbers, but it does not directly point to where the CLI is implemented.
+

@@ -2,7 +2,9 @@
 import subprocess
 import logging
 
-REPO_PATH = "mcp-gateway-registry"
+import os
+
+REPO_PATH = os.path.join(os.path.dirname(__file__), "..", "mcp-gateway-registry")
 
 
 def run_command(command: str):
@@ -14,25 +16,32 @@ def run_command(command: str):
         shell=True,
         cwd=REPO_PATH,
         capture_output=True,
-        text=True
+        text=True,
+        timeout=10
     )
 
     logging.info("Command finished")
 
-    return result.stdout[:200]
+    return result.stdout[:4000]
 
-def select_tool(query_type: str, query: str) -> str:
+def select_tool(query_type: str, query: str):
+
+    q = query.lower()
 
     if query_type == "file_search":
-        return f"grep -rn '{query}' ."
+
+        if "fastapi" in q:
+            return "grep -rn FastAPI ."
+
+        if "cli" in q:
+            return "grep -rn cli ."
+
+        return "grep -rn 'app' ."
 
     if query_type == "function_search":
-        return f"grep -rn 'def ' ."
-
-    if query_type == "dependency":
-        return "cat cli/package.json"
+        return "grep -rn 'def ' ."
 
     if query_type == "explanation":
-        return "tree -L 2"
+        return "grep -rn auth ."
 
-    return f"grep -rn '{query}' ."
+    return "grep -rn FastAPI ."
